@@ -1,11 +1,12 @@
 import React from 'react';
+import Navbar from './components/Navbar';
 
-function App() {
+const App = () => {
 	return (
-		<div className='container flex justify-center py-1 text-sky-800 font-bold'>
-			<h1>English Booking</h1>
-		</div>
+		<>
+			<Navbar />
+		</>
 	);
-}
+};
 
 export default App;
