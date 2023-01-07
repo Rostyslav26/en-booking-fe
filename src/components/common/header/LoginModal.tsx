@@ -8,22 +8,30 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Text,
+	useDisclosure,
 } from '@chakra-ui/react';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import LoginForm from 'components/common/header/LoginForm';
 
-interface LoginModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	onSignUp: () => void;
-}
+const LoginModal = () => {
+	const navigate = useNavigate();
+	const { onClose } = useDisclosure();
 
-const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignUp }) => {
+	const onSignUp = () => {
+		onClose();
+		navigate('/register');
+	};
+
+	const closeModal = () => {
+		onClose();
+		navigate('/');
+	};
+
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} isCentered>
+		<Modal isOpen isCentered onClose={closeModal}>
 			<ModalOverlay />
-
 			<ModalContent>
 				<ModalHeader>
 					<Flex flexDirection='column' alignItems='center'>
@@ -36,9 +44,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose, onSignUp }) =>
 						</Button>
 					</Flex>
 				</ModalHeader>
-
 				<ModalCloseButton />
-
 				<ModalBody mb={2}>
 					<LoginForm onSuccess={onClose} />
 				</ModalBody>

@@ -1,22 +1,12 @@
-import { Box, Button, Container, Flex, Text, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 
 import LoginModal from './LoginModal';
 import RegisterModal from './RegisterModal';
 
 const Header: React.FC = () => {
-	const loginModal = useDisclosure();
-	const registerModal = useDisclosure();
-
-	const openRegisterModal = () => {
-		loginModal.onClose();
-		registerModal.onOpen();
-	};
-
-	const openLoginModal = () => {
-		registerModal.onClose();
-		loginModal.onOpen();
-	};
+	const navigate = useNavigate();
 
 	return (
 		<Box shadow='base' bg='white'>
@@ -25,13 +15,15 @@ const Header: React.FC = () => {
 					<Text as='h1' fontSize='2xl' color='pink.600' fontWeight='bold'>
 						EnBook
 					</Text>
-					<Button variant='outline' colorScheme='pink' onClick={loginModal.onOpen}>
+					<Button variant='outline' colorScheme='pink' onClick={() => navigate('/login')}>
 						Sign in
 					</Button>
 				</Flex>
 			</Container>
-			<LoginModal isOpen={loginModal.isOpen} onClose={loginModal.onClose} onSignUp={openRegisterModal} />
-			<RegisterModal isOpen={registerModal.isOpen} onClose={registerModal.onClose} onSignIn={openLoginModal} />
+			<Routes>
+				<Route path='/login' element={<LoginModal />} />
+				<Route path='/register' element={<RegisterModal />} />
+			</Routes>
 		</Box>
 	);
 };

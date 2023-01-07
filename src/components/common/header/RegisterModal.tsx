@@ -9,22 +9,30 @@ import {
 	ModalHeader,
 	ModalOverlay,
 	Text,
+	useDisclosure,
 } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import RegisterForm from './RegisterForm';
 
-interface RegisterModalProps {
-	isOpen: boolean;
-	onClose: () => void;
-	onSignIn: () => void;
-}
-
-const RegisterModal: React.FC<RegisterModalProps> = ({ isOpen, onClose, onSignIn }) => {
+const RegisterModal = () => {
 	const [showSuccess, setShowSuccess] = useState(false);
+	const navigate = useNavigate();
+	const { onClose } = useDisclosure();
+
+	const onSignIn = () => {
+		onClose();
+		navigate('/login');
+	};
+
+	const closeModal = () => {
+		onClose();
+		navigate('/');
+	};
 
 	return (
-		<Modal isOpen={isOpen} onClose={onClose} isCentered>
+		<Modal isOpen onClose={closeModal} isCentered>
 			<ModalOverlay />
 			<ModalContent>
 				<ModalHeader>
