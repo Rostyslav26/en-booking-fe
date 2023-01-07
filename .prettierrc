@@ -1,0 +1,22 @@
+{
+  "trailingComma": "all",
+  "useTabs": true,
+  "semi": true,
+  "printWidth": 120,
+  "tabWidth": 2,
+  "jsxSingleQuote": true,
+  "singleQuote": true,
+  "importOrder": [
+    "<THIRD_PARTY_MODULES>",
+    "^components/(.*)$",
+    "^ui/(.*)$",
+    "^hooks/(.*)$",
+    "^redux/(.*)$",
+    "^types/(.*)$",
+    "^../(.*)$",
+    "^./(.*)$",
+    "^(.scss)$"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
+}
