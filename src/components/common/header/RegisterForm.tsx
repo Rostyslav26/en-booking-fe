@@ -1,11 +1,12 @@
 import { Alert, AlertIcon, Button } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react';
+import { FormProvider, useForm } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import Field from 'components/common/ui/form/Field';
 
-import { useRegisterMutation } from 'redux/api';
+import { useRegisterMutation } from 'store/api';
 
 import { IRegisterRequest } from 'types/auth.model';
 

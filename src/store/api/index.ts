@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { ILoginRequest, ILoginResponse, IRegisterRequest } from 'types/auth.model';
+import { ILoginRequest, ILoginResponse, IRegisterRequest } from '../../types/auth.model';
 
 import axiosBaseQuery from './baseQuery';
 

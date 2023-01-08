@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import Field from 'components/common/ui/form/Field';
 
-import { useLoginMutation } from 'redux/api';
+import { useLoginMutation } from 'store/api';
 
 import { ILoginRequest } from 'types/auth.model';
 
