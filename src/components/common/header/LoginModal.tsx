@@ -19,7 +19,7 @@ const LoginModal = () => {
 	const navigate = useNavigate();
 	const { onClose } = useDisclosure();
 
-	const onSignUp = () => {
+	const onSignUp = async () => {
 		onClose();
 		navigate('/register');
 	};
@@ -27,6 +27,11 @@ const LoginModal = () => {
 	const closeModal = () => {
 		onClose();
 		navigate('/');
+	};
+
+	const onSuccessfulLogin = (token: string) => {
+		localStorage.setItem('token', token);
+		closeModal();
 	};
 
 	return (
@@ -46,7 +51,7 @@ const LoginModal = () => {
 				</ModalHeader>
 				<ModalCloseButton />
 				<ModalBody mb={2}>
-					<LoginForm onSuccess={onClose} />
+					<LoginForm onSuccess={onSuccessfulLogin} />
 				</ModalBody>
 			</ModalContent>
 		</Modal>

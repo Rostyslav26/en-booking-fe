@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+
 import { ILoginRequest, ILoginResponse, IRegisterRequest } from 'types/auth.model';
 
 import axiosBaseQuery from './baseQuery';
@@ -30,4 +31,4 @@ export const api = createApi({
 	}),
 });
 
-export const { useLogoutMutation, useLoginMutation, useRegisterMutation } = api;
+export const { useLoginMutation, useRegisterMutation } = api;
