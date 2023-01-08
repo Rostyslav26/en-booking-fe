@@ -19,14 +19,9 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "paths": {
-      "components/*": ["src/components/*"],
-      "hooks/*": ["src/hooks/*"],
-      "types/*": ["src/types/*"],
-      "redux/*": ["src/redux/*"]
-    }
+    "baseUrl": "src",
   },
   "include": [
-    "src"
+    "**/*.ts"
   ]
 }
