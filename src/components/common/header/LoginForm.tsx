@@ -1,7 +1,7 @@
 import { Alert, AlertIcon, Button, Checkbox, Flex } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
 import Field from 'components/common/ui/form/Field';
 
@@ -35,7 +35,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 			<Field {...register('email')} label='Email' type='email' error={errors.email} />
 			<Field {...register('password')} label='Password' type='password' error={errors.password} />
 
-			<Flex justifyContent='space-between'>
+			<Flex mt={5} justifyContent='space-between'>
 				<Checkbox {...register('rememberMe')}>Remember me</Checkbox>
 				<Button variant='link' size='sm' colorScheme='pink'>
 					Forgot password?

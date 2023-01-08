@@ -12,8 +12,8 @@ const Field = forwardRef<HTMLInputElement, FieldProps & InputProps>(({ error, na
 	return (
 		<FormControl isInvalid={!!error}>
 			<FormLabel htmlFor={name}>{label}</FormLabel>
-			<Input id={name} {...rest} ref={ref} />
-			<FormErrorMessage>{error?.message}</FormErrorMessage>
+			<Input id={name} name={name} {...rest} ref={ref} />
+			<FormErrorMessage mb={2}>{error?.message}</FormErrorMessage>
 		</FormControl>
 	);
 });
