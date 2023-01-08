@@ -1,12 +1,13 @@
 import { Alert, AlertIcon, Button, Checkbox, Flex } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
-import { ILoginRequest } from 'types/auth.model';
+import { useForm } from 'react-hook-form';
 
-import FormField from 'components/common/ui/form/FormField';
+import Field from 'components/common/ui/form/Field';
 
 import { useLoginMutation } from 'redux/api';
+
+import { ILoginRequest } from 'types/auth.model';
 
 import { LoginFormSchema } from './validations';
 
@@ -19,10 +20,10 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 	const {
 		register,
 		handleSubmit,
-		formState: { isSubmitting },
+		formState: { errors, isSubmitting },
 	} = form;
 
-	const [login, { error }] = useLoginMutation();
+	const [login, { error: apiError }] = useLoginMutation();
 
 	const onSubmit = handleSubmit(async (values) => {
 		const result = await login(values).unwrap();
@@ -30,29 +31,27 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 	});
 
 	return (
-		<FormProvider {...form}>
-			<form onSubmit={onSubmit}>
-				<FormField name='email' label='Email' type='email' />
-				<FormField name='password' label='Password' type='password' />
+		<form onSubmit={onSubmit}>
+			<Field {...register('email')} label='Email' type='email' error={errors.email} />
+			<Field {...register('password')} label='Password' type='password' error={errors.password} />
 
-				<Flex justifyContent='space-between'>
-					<Checkbox {...register('rememberMe')}>Remember me</Checkbox>
-					<Button variant='link' size='sm' colorScheme='pink'>
-						Forgot password?
-					</Button>
-				</Flex>
-
-				{error && (
-					<Alert mt={2} status='error'>
-						<AlertIcon />
-						{error.message}
-					</Alert>
-				)}
-				<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
-					Sign in
+			<Flex justifyContent='space-between'>
+				<Checkbox {...register('rememberMe')}>Remember me</Checkbox>
+				<Button variant='link' size='sm' colorScheme='pink'>
+					Forgot password?
 				</Button>
-			</form>
-		</FormProvider>
+			</Flex>
+
+			{apiError && (
+				<Alert mt={2} status='error'>
+					<AlertIcon />
+					{apiError.message}
+				</Alert>
+			)}
+			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
+				Sign in
+			</Button>
+		</form>
 	);
 };
 

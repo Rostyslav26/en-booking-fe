@@ -1,9 +1,9 @@
 import { Alert, AlertIcon, Button } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React, { useEffect } from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
-import FormField from 'components/common/ui/form/FormField';
+import Field from 'components/common/ui/form/Field';
 
 import { useRegisterMutation } from 'redux/api';
 
@@ -18,10 +18,11 @@ interface RegisterFormProps {
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 	const form = useForm<IRegisterRequest>({ resolver: zodResolver(RegisterFormSchema) });
 	const {
+		register,
 		handleSubmit,
-		formState: { isSubmitting },
+		formState: { isSubmitting, errors },
 	} = form;
-	const [registerUser, { error }] = useRegisterMutation();
+	const [registerUser, { error: apiError }] = useRegisterMutation();
 
 	useEffect(() => {
 		form.reset();
@@ -33,26 +34,29 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 	});
 
 	return (
-		<FormProvider {...form}>
-			<form onSubmit={onSubmit}>
-				<FormField name='email' label='Email' type='email' />
-				<FormField name='password' label='Password' type='password' />
-				<FormField name='confirmedPassword' label='Confirmed password' type='password' />
-				<FormField name='firstName' label='First name' />
-				<FormField name='lastName' label='Last name' />
+		<form onSubmit={onSubmit}>
+			<Field {...register('email')} label='Email' type='email' error={errors.email} />
+			<Field {...register('password')} label='Password' type='password' error={errors.password} />
+			<Field
+				{...register('confirmedPassword')}
+				label='Confirmed password'
+				type='password'
+				error={errors.confirmedPassword}
+			/>
+			<Field {...register('firstName')} label='First name' error={errors.firstName} />
+			<Field {...register('lastName')} label='Last name' error={errors.firstName} />
 
-				{error && (
-					<Alert mt={2} status='error'>
-						<AlertIcon />
-						{error?.message}
-					</Alert>
-				)}
+			{apiError && (
+				<Alert mt={2} status='error'>
+					<AlertIcon />
+					{apiError?.message}
+				</Alert>
+			)}
 
-				<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
-					Register
-				</Button>
-			</form>
-		</FormProvider>
+			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
+				Register
+			</Button>
+		</form>
 	);
 };
 
