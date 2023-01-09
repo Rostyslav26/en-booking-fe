@@ -12,10 +12,7 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
-
-import LoginModal from './LoginModal';
-import RegisterModal from './RegisterModal';
+import { Outlet, useNavigate } from 'react-router-dom';
 import useAccount from 'hooks/useAccount';
 import { SettingsIcon } from '@chakra-ui/icons';
 
@@ -46,10 +43,7 @@ const Header: React.FC = () => {
 					)}
 				</Flex>
 			</Container>
-			<Routes>
-				<Route path='/login' element={<LoginModal />} />
-				<Route path='/register' element={<RegisterModal />} />
-			</Routes>
+			<Outlet />
 		</Box>
 	);
 };

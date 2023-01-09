@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import LoginModal from 'components/common/header/LoginModal';
 import RegisterModal from 'components/common/header/RegisterModal';
+import AuthenticatedBlockedRoute from 'components/AuthenticatedBlockedRoute';
 
 import Home from './pages/Home';
 
@@ -14,11 +15,11 @@ const router = createBrowserRouter([
 		children: [
 			{
 				path: 'login',
-				element: <LoginModal />,
+				element: <AuthenticatedBlockedRoute component={LoginModal} path='/login' />,
 			},
 			{
 				path: 'register',
-				element: <RegisterModal />,
+				element: <AuthenticatedBlockedRoute component={RegisterModal} path='/register' />,
 			},
 		],
 	},
