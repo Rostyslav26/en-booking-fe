@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 
-import { ILoginRequest, ILoginResponse, IRegisterRequest } from '../../types/auth.model';
+import { ILoginRequest, ILoginResponse, IRegisterRequest, IUser } from '../../types/auth.model';
 
 import axiosBaseQuery from './baseQuery';
 
@@ -28,7 +28,13 @@ export const api = createApi({
 				data,
 			}),
 		}),
+		getUser: builder.query<IUser, void>({
+			query: () => ({
+				url: '/user/profile',
+				method: 'GET',
+			})
+		}),
 	}),
 });
 
-export const { useLoginMutation, useRegisterMutation } = api;
+export const { useLoginMutation, useRegisterMutation, useLazyGetUserQuery } = api;

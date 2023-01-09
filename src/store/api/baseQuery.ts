@@ -31,24 +31,24 @@ const axiosBaseQuery =
 		unknown,
 		ApiError
 	> =>
-	async ({ url, method, data, params }) => {
-		const token = localStorage.getItem('token');
-		const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
+		async ({ url, method, data, params }) => {
+			const token = localStorage.getItem('token');
+			const headers = token ? { Authorization: `Bearer ${token}` } : undefined;
 
-		try {
-			const result = await axios({ url: baseUrl + url, method, data, params, headers });
+			try {
+				const result = await axios({ url: baseUrl + url, method, data, params, headers });
 
-			return { data: result.data };
-		} catch (axiosError) {
-			let { response } = axiosError as AxiosError<ApiError>;
+				return { data: result.data };
+			} catch (axiosError) {
+				let { response } = axiosError as AxiosError<ApiError>;
 
-			if (response?.status === 401) {
-				localStorage.removeItem('token');
-				window.location.href = '/login';
+				if (response?.status === 401) {
+					localStorage.removeItem('token');
+					window.location.href = '/login';
+				}
+
+				return { error: response?.data };
 			}
-
-			return { error: response?.data };
-		}
-	};
+		};
 
 export default axiosBaseQuery;

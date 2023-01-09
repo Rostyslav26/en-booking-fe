@@ -15,3 +15,12 @@ export interface IRegisterRequest {
 	firstName: string;
 	lastName: string;
 }
+
+export interface IUser {
+	id: number;
+	email: string;
+	firstName: string;
+	lastName: string;
+	imageUrl: string;
+	fullName: string;
+}

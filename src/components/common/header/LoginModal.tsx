@@ -40,13 +40,9 @@ const LoginModal = () => {
 			<ModalContent>
 				<ModalHeader>
 					<Flex flexDirection='column' alignItems='center'>
-						<Text as='h1' fontSize='2xl' color='pink.600' fontWeight='bold'>
-							EnBook
-						</Text>
+						<Text as='h1' fontSize='2xl' color='pink.600' fontWeight='bold'>EnBook</Text>
 						<Text fontSize='sm'>Don't have an account?</Text>
-						<Button onClick={onSignUp} variant='link' size='sm' colorScheme='pink'>
-							Sign up
-						</Button>
+						<Button onClick={onSignUp} variant='link' size='sm' colorScheme='pink'>Sign up</Button>
 					</Flex>
 				</ModalHeader>
 				<ModalCloseButton />

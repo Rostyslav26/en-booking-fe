@@ -37,23 +37,16 @@ const RegisterModal = () => {
 			<ModalContent>
 				<ModalHeader>
 					<Flex flexDirection='column' alignItems='center'>
-						<Text as='h1' fontSize='2xl' color='pink.600' fontWeight='bold'>
-							EnBook
-						</Text>
-
+						<Text as='h1' fontSize='2xl' color='pink.600' fontWeight='bold'>EnBook</Text>
 						{showSuccess ? (
 							<Flex alignItems='center'>
 								<CheckCircleIcon boxSize='24px' color='green.500' />
-								<Text fontSize='sm' ml={2}>
-									Check your email for activation
-								</Text>
+								<Text fontSize='sm' ml={2}>Check your email for activation</Text>
 							</Flex>
 						) : (
 							<>
 								<Text fontSize='sm'>Already have an account?</Text>
-								<Button onClick={onSignIn} variant='link' size='sm' colorScheme='pink'>
-									Sign in
-								</Button>
+								<Button onClick={onSignIn} variant='link' size='sm' colorScheme='pink'>Sign in</Button>
 							</>
 						)}
 					</Flex>

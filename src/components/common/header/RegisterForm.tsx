@@ -17,11 +17,7 @@ interface RegisterFormProps {
 
 const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 	const form = useForm<IRegisterRequest>({ resolver: zodResolver(RegisterFormSchema) });
-	const {
-		register,
-		handleSubmit,
-		formState: { isSubmitting, errors },
-	} = form;
+	const { register, handleSubmit, formState: { isSubmitting, errors } } = form;
 	const [registerUser, { error: apiError }] = useRegisterMutation();
 
 	useEffect(() => {
@@ -37,12 +33,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 		<form onSubmit={onSubmit}>
 			<Field {...register('email')} label='Email' type='email' error={errors.email} />
 			<Field {...register('password')} label='Password' type='password' error={errors.password} />
-			<Field
-				{...register('confirmedPassword')}
-				label='Confirmed password'
-				type='password'
-				error={errors.confirmedPassword}
-			/>
+			<Field {...register('confirmedPassword')} label='Confirmed password' error={errors.confirmedPassword} />
 			<Field {...register('firstName')} label='First name' error={errors.firstName} />
 			<Field {...register('lastName')} label='Last name' error={errors.firstName} />
 
@@ -53,9 +44,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 				</Alert>
 			)}
 
-			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
-				Register
-			</Button>
+			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>Register</Button>
 		</form>
 	);
 };

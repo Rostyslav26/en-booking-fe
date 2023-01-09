@@ -1,13 +1,13 @@
 import { Alert, AlertIcon, Button, Checkbox, Flex } from '@chakra-ui/react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import Field from 'components/common/ui/form/Field';
 
 import { useLoginMutation } from 'store/api';
 
-import { ILoginRequest } from 'types/auth.model';
+import { ILoginRequest, IUser } from 'types/auth.model';
 
 import { LoginFormSchema } from './validations';
 
@@ -17,17 +17,13 @@ interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 	const form = useForm<ILoginRequest>({ resolver: zodResolver(LoginFormSchema) });
-	const {
-		register,
-		handleSubmit,
-		formState: { errors, isSubmitting },
-	} = form;
+	const { register, handleSubmit, formState: { errors, isSubmitting } } = form;
 
 	const [login, { error: apiError }] = useLoginMutation();
 
 	const onSubmit = handleSubmit(async (values) => {
-		const result = await login(values).unwrap();
-		onSuccess(result.token);
+		const { token } = await login(values).unwrap();
+		onSuccess(token);
 	});
 
 	return (
@@ -37,9 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 
 			<Flex mt={5} justifyContent='space-between'>
 				<Checkbox {...register('rememberMe')}>Remember me</Checkbox>
-				<Button variant='link' size='sm' colorScheme='pink'>
-					Forgot password?
-				</Button>
+				<Button variant='link' size='sm' colorScheme='pink'>Forgot password?</Button>
 			</Flex>
 
 			{apiError && (
@@ -48,9 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess }) => {
 					{apiError.message}
 				</Alert>
 			)}
-			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>
-				Sign in
-			</Button>
+			<Button type='submit' colorScheme='pink' mt={5} isLoading={isSubmitting}>Sign in</Button>
 		</form>
 	);
 };

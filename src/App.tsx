@@ -1,6 +1,6 @@
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import * as React from 'react';
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import LoginModal from 'components/common/header/LoginModal';
 import RegisterModal from 'components/common/header/RegisterModal';
