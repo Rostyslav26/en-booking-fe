@@ -12,13 +12,17 @@ import {
 	Text,
 } from '@chakra-ui/react';
 import React from 'react';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import useAccount from 'hooks/useAccount';
 import { SettingsIcon } from '@chakra-ui/icons';
 
 const Header: React.FC = () => {
 	const navigate = useNavigate();
 	const [user, logout] = useAccount();
+
+	const onLogout = () => {
+		logout("/login");
+	}
 
 	return (
 		<Box shadow='base' bg='white'>
@@ -33,7 +37,7 @@ const Header: React.FC = () => {
 							<MenuList>
 								<MenuDivider />
 								<MenuItem icon={<SettingsIcon />} onClick={() => navigate('/settings')}>Settings</MenuItem>
-								<MenuItem onClick={logout}>Logout</MenuItem>
+								<MenuItem onClick={onLogout}>Logout</MenuItem>
 							</MenuList>
 						</Menu>
 					) : (
@@ -43,7 +47,6 @@ const Header: React.FC = () => {
 					)}
 				</Flex>
 			</Container>
-			<Outlet />
 		</Box>
 	);
 };

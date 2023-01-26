@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useLazyGetUserQuery } from 'store/api';
 
-const useAccount = (): [IUser | null, () => void] => {
+const useAccount = (): [IUser | null, (to: string) => void] => {
 	const [fetchUser, { error }] = useLazyGetUserQuery();
 	const [user, setUser] = useState<IUser | null>(null);
 	const navigate = useNavigate();
@@ -12,8 +12,7 @@ const useAccount = (): [IUser | null, () => void] => {
 		if (localStorage.getItem('token')) {
 			fetchUser().unwrap().then((res) => {
 				if (error) {
-					localStorage.removeItem('token');
-					navigate('/login');
+					logout('/');
 				} else {
 					setUser(res);
 				}
@@ -21,10 +20,10 @@ const useAccount = (): [IUser | null, () => void] => {
 		}
 	}, [localStorage.getItem('token')]);
 
-	const logout = () => {
+	const logout = (to: string) => {
 		localStorage.removeItem('token');
 		setUser(null);
-		navigate('/');
+		navigate(to);
 	};
 
 	return [user, logout];

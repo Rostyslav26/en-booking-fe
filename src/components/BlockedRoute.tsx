@@ -1,22 +1,19 @@
 import React from 'react';
-import { Navigate, RouteProps } from 'react-router-dom';
+import { Navigate, Outlet, RouteProps } from 'react-router-dom';
 
 interface BlockedRouterProps {
-	component: React.ComponentType;
 	redirectTo: string;
 	isAllowed: boolean;
 }
 
 type Props = BlockedRouterProps & RouteProps;
 
-const BlockedRoute: React.FC<Props> = ({ component: Component, redirectTo, isAllowed, ...rest }) => {
+const BlockedRoute: React.FC<Props> = ({ redirectTo, isAllowed, ...rest }) => {
 	if (!isAllowed) {
 		return <Navigate to={redirectTo} replace />;
 	}
 
-	return (
-		<Component />
-	);
+	return <Outlet />;
 };
 
 export default BlockedRoute;

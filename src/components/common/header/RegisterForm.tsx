@@ -33,7 +33,7 @@ const RegisterForm: React.FC<RegisterFormProps> = ({ onSuccess }) => {
 		<form onSubmit={onSubmit}>
 			<Field {...register('email')} label='Email' type='email' error={errors.email} />
 			<Field {...register('password')} label='Password' type='password' error={errors.password} />
-			<Field {...register('confirmedPassword')} label='Confirmed password' error={errors.confirmedPassword} />
+			<Field {...register('confirmedPassword')} label='Confirmed password' type='password' error={errors.confirmedPassword} />
 			<Field {...register('firstName')} label='First name' error={errors.firstName} />
 			<Field {...register('lastName')} label='Last name' error={errors.firstName} />
 
